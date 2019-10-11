@@ -2,6 +2,9 @@ const BASE_URL = "http://localhost:3000"
 const TRAINERS_URL = `${BASE_URL}/trainers`
 const POKEMONS_URL = `${BASE_URL}/pokemons`
 const main = document.querySelector('main');
+main.addEventListener('click', function(e) {
+  console.log(e.target)
+})
 
 function getTrainers() {
   return fetch(TRAINERS_URL)
@@ -23,6 +26,7 @@ function renderTrainers() {
       const p = document.createElement('p');
       p.innerText = `${trainer.name}`;
       const button = document.createElement('button');
+      
       button.setAttribute('data-trainer-id', `${trainer.id}`);
       button.innerText = "Add Pokemon";
       const list = document.createElement('ul');
