@@ -1,2 +1,15 @@
 class TrainersController < ApplicationController
-end
+
+    def index
+        @trainers = Trainer.all
+        render json: @trainers, status: 200
+    end
+
+
+
+
+
+
+
+    
+end # controller end
