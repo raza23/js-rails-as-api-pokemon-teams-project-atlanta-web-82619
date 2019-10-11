@@ -45,19 +45,19 @@ for achieving these goals is left to you.
 
 ## Backend
 
-Create a backend from scratch inside this lesson using an API-only Rails build.
+<!-- apiCreate a backend from scratch inside this lesson using an API-only Rails build.
 Exactly how you choose to structure things and the following guidelines to get
 started:
 
 ```sh
-rails new pokemon-teams-backend --api
+rails new pokemon-teams-backend -- -->
 ```
 
 Once the backend is created, navigate into the new folder. Within this new Rails
 build, add the following gem to the Gemfile:
 
-```rb
-gem 'faker'
+em 'faker'```rb
+g
 ```
 
 While we are in the Gemfile, uncomment `gem 'rack-cors'`, then run 
@@ -66,15 +66,15 @@ resource sharing. To get rack-cors working, once the gem is installed, uncomment
 the following code in `config/initializers/cors.rb`:
 
 ```rb
-Rails.application.config.middleware.insert_before 0, Rack::Cors do
-  allow do
-    origins "*"
+# Rails.application.config.middleware.insert_before 0, Rack::Cors do
+#   allow do
+#     origins "*"
 
-    resource '*',
-      headers: :any,
-      methods: [:get, :post, :put, :patch, :delete, :options, :head]
-  end
-end
+#     resource '*',
+#       headers: :any,
+#       methods: [:get, :post, :put, :patch, :delete, :options, :head]
+#   end
+# end
 ```
 
 > **Aside**: Notice that we've put this in `config/initializers/cors.rb`. We've
@@ -93,7 +93,7 @@ configuration changes can take effect.
 With these gems installed, use the following resource generators to create
 resources for this API:
 
-```sh
+<!-- ```sh
 rails g resource trainer name
 rails g resource pokemon species nickname trainer:references
 ```
@@ -101,9 +101,9 @@ rails g resource pokemon species nickname trainer:references
 Run `rails db:migrate` to create a schema, models, and controllers. Using
 `trainer:references` will set up `belongs_to :trainer` in the `Pokemon` model,
 though it won't update the other side of the relationship. You will need to add
-the `has_many :pokemons` in the `Trainer` model yourself.
+the `has_many :pokemons` in the `Trainer` model yourself. -->
 
-In `db/seeds.rb`, add the following and run `rails db:seed`:
+<!-- In `db/seeds.rb`, add the following and run `rails db:seed`:
 
 ```rb
 require 'faker'
@@ -138,7 +138,7 @@ trainer_collection.each do |trainer|
     species = Faker::Games::Pokemon.name
     Pokemon.create(nickname: name, species: species, trainer_id: trainer.id)
   end
-end
+end -->
 ```
 
 At this point, you should be able to run `rails console` and confirm that you
