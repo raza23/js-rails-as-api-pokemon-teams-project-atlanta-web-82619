@@ -2,9 +2,17 @@ const BASE_URL = "http://localhost:3000"
 const TRAINERS_URL = `${BASE_URL}/trainers`
 const POKEMONS_URL = `${BASE_URL}/pokemons`
 const main = document.querySelector('main');
-main.addEventListener('click', function(e) {
-  console.log(e.target)
-})
+
+function remove(id) {
+  return fetch(`http://localhost:3000/pokemons/${id}`, {method: 'DELETE'})
+    .then(res => res.json())
+    .then(res => {
+      console.log('Deleted:', res.message)
+      return res
+    })
+    .catch(err => console.error(err))
+}
+
 
 function getTrainers() {
   return fetch(TRAINERS_URL)
@@ -29,6 +37,25 @@ function renderTrainers() {
       
       button.setAttribute('data-trainer-id', `${trainer.id}`);
       button.innerText = "Add Pokemon";
+      button.addEventListener('click', function(e) {
+        
+        fetch(POKEMONS_URL, {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            pokemon: {
+              "trainer_id": `${button.attributes[0].value}`
+            }
+          })
+        })
+        .then(resp=> resp.json())
+        .then(pokemon => console.log(pokemon))
+        
+      })
+      // pokemon added into db after clicking button, but doesn't show up on page until I refresh it
       const list = document.createElement('ul');
       //make list and make list item for each pokemon
       // debugger
@@ -39,6 +66,10 @@ function renderTrainers() {
         releaseButton.classList.add('release');
         releaseButton.setAttribute('data-pokemon-id', `${pokemon.id}`);
         releaseButton.innerText = "Release";
+        // add event listener to release button to delete pokemon when clicked
+        releaseButton.addEventListener('click', function() {
+          console.log(releaseButton.attributes[1].value)
+        })
         listItem.appendChild(releaseButton);
         list.appendChild(listItem);
       })
@@ -47,6 +78,7 @@ function renderTrainers() {
       card.appendChild(button);
       card.appendChild(list);
       main.appendChild(card);
+      
 
     })
   })
