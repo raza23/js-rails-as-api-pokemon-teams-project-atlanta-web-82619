@@ -17,16 +17,16 @@ class PokemonsController < ApplicationController
       pokemon.save
       render json: pokemon, status: 201
     else
-      flash[:message] ="Too many pokemon"
+      render json: :error, status: :not_found
     end
 
     
   end
 
-  def delete
+  def destroy
     pokemon = Pokemon.find_by(id: params[:id])
     pokemon.destroy
-    render json: Pokemon.all
+    
   end
 
   private
